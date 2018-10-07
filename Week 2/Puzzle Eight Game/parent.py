@@ -60,6 +60,16 @@ class Puzzle8Node(Node):
    # added a get_parent() method to keep track of parents
    def get_parent(self):
        return self.parent
+   
+
+   # added a get_path() method to keep track of the path from start to finish
+   def get_path(self):
+       path = [self]
+       child = self
+       while child.get_parent() != None:
+           child = child.get_parent()
+           path.append(child)
+       return path
 
    def get_moves(self):
       # The moves depend on the current board position
@@ -100,7 +110,7 @@ class Puzzle8Node(Node):
       return [Puzzle8Node(move, Puzzle8Node(self.name)) for move in moves]
 
    def test(self):
-      p = Puzzle8Node('2831647 5')
+      p = Puzzle8Node('2831647 5') # Lugar fig 3.17
       moves = p.get_moves()
 
       assert len(moves) == 3
